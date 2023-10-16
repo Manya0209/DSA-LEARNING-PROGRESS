@@ -12,6 +12,7 @@ void reverse(Node* &head, Node* curr, Node* prev){
 }
 
 Node* reverseLinkedList(Node* head){
+    //Approach 1
     // if(head==NULL || head->next==NULL){
     //     return head;
     // }
@@ -28,9 +29,12 @@ Node* reverseLinkedList(Node* head){
 
     // return prev;
 
+
+    //Approach 2
     Node* curr= head;
     Node* prev= NULL;
-    
+    reverse(head, curr, prev);
+    return head;
 }
 
 int main(){
