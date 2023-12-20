@@ -4,9 +4,7 @@
 #include <limits.h>
 using namespace std;
 
-class Solution{
-    private: 
-    vector<int> nextSmallerElement(vector<int> &arr, int n){
+vector<int> nextSmallerElement(int* arr, int n){
         stack<int> s;
         s.push(-1);
         vector<int> ans;
@@ -21,7 +19,7 @@ class Solution{
         }
         return ans;
     }
-    vector<int> prevSmallerElement(vector<int> &arr, int n){
+    vector<int> prevSmallerElement(int* arr, int n){
         stack<int> s;
         s.push(-1);
         vector<int> ans;
@@ -37,9 +35,9 @@ class Solution{
         return ans; 
     }//time complexity- O(n)
 
-    public:
-    int largestRectangleArea(vector<int> &heights){
-        int n = heights.size();
+
+int largestRectangleArea(int* heights, int n){
+        //int n = heights.size();
 
          vector<int> next(n);
          next= nextSmallerElement(heights, n);
@@ -60,5 +58,28 @@ class Solution{
          }
 
          return area;
-    }//time complexity- O(n)
-};
+}//time complexity- O(n)
+
+int maxArea(int **M, int n, int m){
+    //area for first row
+    int area= largestRectangleArea(M[0], m);
+
+    //for remaining rows
+    for(int i=1; i<n; i++){
+        for(int j=0; j<m; j++){
+            //row update to make an array for histogram 
+            if(M[i][j] != 0)
+              M[i][j]= M[i][j]+ M[i-1][j];
+
+            else
+              M[i][j]= 0;  
+        }
+        area= max(area, largestRectangleArea(M[i], m));
+    }
+    return area;
+}// time complexity- O(m*n)
+//space complexity- O(n)
+
+int main(){
+
+}
